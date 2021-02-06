@@ -22,7 +22,7 @@ For the dataset generation, please download:
 
 Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Please note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory.
 
-### Evaluation real-world datasets
+### Evaluation on real-world datasets
 All evaluation datasets can be found at http://cmp.felk.cvut.cz/fmo/. We provide a download_datasets.sh script to download the Falling Objects, the TbD-3D, and the TbD datasets.
 
 
