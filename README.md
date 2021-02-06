@@ -4,7 +4,7 @@
 
 Reference
 ------------
-If you use this repository, please cite the following publication:
+If you use this repository, please cite the following publication ( https://arxiv.org/abs/2012.00595 ):
 
 ```bibtex
 @inproceedings{defmo,
