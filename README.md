@@ -16,7 +16,7 @@ For the dataset generation, please download:
 
 * Backgrounds for the training dataset from the VOT dataset: https://www.votchallenge.net/vot2018/dataset.html. 
 
-* (optional) Backgrounds for the testing dataset from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
+* Backgrounds for the testing dataset from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
 
 * Blender 2.79b with Python enabled
 
