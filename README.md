@@ -18,7 +18,7 @@ For the dataset generation, please download:
 
 * Backgrounds for the testing dataset from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
 
-* Blender 2.79b with Python enabled
+* Blender 2.79b with Python enabled.
 
 Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Please note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory.
 
