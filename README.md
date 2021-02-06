@@ -67,7 +67,7 @@ If you use this repository, please cite the following publication ( https://arxi
   title = {DeFMO: Deblurring and Shape Recovery of Fast Moving Objects},
   booktitle = {arxiv},
   address = {online},
-  month = jan,
+  month = dec,
   year = {2020}
 }
 ```
