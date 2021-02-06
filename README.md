@@ -8,9 +8,11 @@ The pre-trained DeFMO model as reported in the paper is available here: https://
 
 
 ### Dataset generation
-For the dataset generation, please download the ShapeNetCore.v2 dataset: https://www.shapenet.org/.
+For the dataset generation, please download: 
 
-The textures are from the DTD dataset: https://www.robots.ox.ac.uk/~vgg/data/dtd/. The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded here: https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK.
+* ShapeNetCore.v2 dataset: https://www.shapenet.org/.
+
+* The textures are from the DTD dataset: https://www.robots.ox.ac.uk/~vgg/data/dtd/. The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded here: https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK.
 
 Backgrounds for the training dataset are from the VOT dataset: https://www.votchallenge.net/vot2018/dataset.html. Backgrounds for the testing dataset are from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
 
