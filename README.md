@@ -7,7 +7,7 @@
 The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF.
 
 
-### Dataset generation
+### Synthetic dataset generation
 For the dataset generation, please download: 
 
 * ShapeNetCore.v2 dataset: https://www.shapenet.org/.
