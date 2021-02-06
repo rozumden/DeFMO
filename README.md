@@ -41,7 +41,7 @@ For the dataset generation, please download:
 
 * Blender 2.79b with Python enabled.
 
-Then, insert your paths in renderer/settings.py file. To generate the dataset, use 
+Then, insert your paths in renderer/settings.py file. To generate the dataset, run in renderer sub-folder: 
 ```bash
 python run_render.py
 ```
