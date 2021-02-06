@@ -6,6 +6,12 @@
 
 The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF.
 
+### Evaluation
+After downloading the pre-trained models and downloading the evaluation datasets, you can run
+```bash
+python eval_dataset.py
+```
+
 
 ### Synthetic dataset generation
 For the dataset generation, please download: 
@@ -20,7 +26,7 @@ For the dataset generation, please download:
 
 * Blender 2.79b with Python enabled.
 
-Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory. Due to this and also the ShapeNet licence, we cannot make the pre-generated dataset public - please generate it by yourself. 
+Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory. Due to this and also the ShapeNet licence, we cannot make the pre-generated dataset public - please generate it by yourself using the steps above. 
 
 ### Evaluation on real-world datasets
 All evaluation datasets can be found at http://cmp.felk.cvut.cz/fmo/. We provide a download_datasets.sh script to download the Falling Objects, the TbD-3D, and the TbD datasets.
