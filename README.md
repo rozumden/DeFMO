@@ -4,7 +4,18 @@
 
 ### Pre-trained models
 
-The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF.
+The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF. Put them into ./saved_models sub-folder.
+
+### Inference
+For generating video temporal super-resolution:
+```bash
+python run.py --video input.mp4
+```
+
+For generating temporal super-resolution of a single frame with the given background:
+```bash
+python run.py --image im.png --background bgr.png
+```
 
 ### Evaluation
 After downloading the pre-trained models and downloading the evaluation datasets, you can run
