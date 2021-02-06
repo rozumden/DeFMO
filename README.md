@@ -9,12 +9,12 @@ The pre-trained DeFMO model as reported in the paper is available here: https://
 ### Inference
 For generating video temporal super-resolution:
 ```bash
-python run.py --video input.mp4
+python run.py --video example/falling_pen.avi
 ```
 
 For generating temporal super-resolution of a single frame with the given background:
 ```bash
-python run.py --image im.png --background bgr.png
+python run.py --im example/im.png --bgr example/bgr.png
 ```
 
 ### Evaluation
