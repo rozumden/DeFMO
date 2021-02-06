@@ -4,6 +4,8 @@
 
 ### Qualitative results: https://www.youtube.com/watch?v=pmAynZvaaQ4
 
+<img src="example/results_defmo.png" width="500">
+
 ### Pre-trained models
 
 The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF. Put them into ./saved_models sub-folder.
