@@ -132,9 +132,9 @@ def imwrite(im, name = tmp_folder + 'tmp.png'):
 	im[im>1]=1
 	cv2.imwrite(name, im[:,:,[2,1,0]]*255)
 
-def fmo_detect_maxarea(I,B):
+def fmo_detect_maxarea(I,B,maxarea = 0.1):
 	## simulate FMO detector -> find approximate location of FMO
-	dI = (np.sum(np.abs(I-B),2) > 0.1).astype(float)
+	dI = (np.sum(np.abs(I-B),2) > maxarea).astype(float)
 	labeled = label(dI)
 	regions = regionprops(labeled)
 	ind = -1
