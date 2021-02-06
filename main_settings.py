@@ -43,7 +43,7 @@ g_sharp_mask_type = 'entropy'
 g_timeconsistency_type = 'ncc' # oflow, ncc
 
 g_use_selfsupervised_model = True
-g_use_selfsupervised_sharp_mask = False
+g_use_selfsupervised_sharp_mask = True
 g_use_selfsupervised_timeconsistency = True
 g_use_supervised = True
 g_use_latent_learning = True
