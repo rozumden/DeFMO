@@ -20,7 +20,7 @@ For the dataset generation, please download:
 
 * Blender 2.79b with Python enabled.
 
-Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Please note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory.
+Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory. Due to this and also the ShapeNet licence, we cannot make the pre-generated dataset public - please generate it by yourself. 
 
 ### Evaluation on real-world datasets
 All evaluation datasets can be found at http://cmp.felk.cvut.cz/fmo/. We provide a download_datasets.sh script to download the Falling Objects, the TbD-3D, and the TbD datasets.
