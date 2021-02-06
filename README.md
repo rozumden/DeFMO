@@ -12,11 +12,15 @@ For the dataset generation, please download:
 
 * ShapeNetCore.v2 dataset: https://www.shapenet.org/.
 
-* The textures are from the DTD dataset: https://www.robots.ox.ac.uk/~vgg/data/dtd/. The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded here: https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK.
+* Textures from the DTD dataset: https://www.robots.ox.ac.uk/~vgg/data/dtd/. The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded here: https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK.
 
-Backgrounds for the training dataset are from the VOT dataset: https://www.votchallenge.net/vot2018/dataset.html. Backgrounds for the testing dataset are from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
+* Backgrounds for the training dataset from the VOT dataset: https://www.votchallenge.net/vot2018/dataset.html. 
 
-Then, insert your paths in renderer/settings.py file. You also need Blender 2.79b with Python enabled. Then, use run_render.py to generate the dataset. Please note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory.
+* (optional) Backgrounds for the testing dataset from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
+
+* Blender 2.79b with Python enabled
+
+Then, insert your paths in renderer/settings.py file. Then, use run_render.py to generate the dataset. Please note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory.
 
 ### Evaluation real-world datasets
 All evaluation datasets can be found at http://cmp.felk.cvut.cz/fmo/. We provide a download_datasets.sh script to download the Falling Objects, the TbD-3D, and the TbD datasets.
