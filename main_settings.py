@@ -14,6 +14,7 @@ g_falling_folder = dataset_folder+'falling_objects/'
 g_wildfmo_folder = dataset_folder+'wildfmo/'
 g_youtube_folder = dataset_folder+'youtube/'
 
+## TODO: provide valid training and testing/validation dataset paths
 g_dataset_folder = dataset_folder+'ShapeNetv2/ShapeBlur1000STL/'
 g_validation_folder = dataset_folder+'ShapeNetv2/ShapeBlur20STL/'
 g_temp_folder = run_folder+strdate+'_train'
