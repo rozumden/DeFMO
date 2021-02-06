@@ -2,7 +2,7 @@
 
 ### DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (arxiv 2020)
 
-## Download
+### Pre-trained models
 
 The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF.
 
@@ -11,6 +11,8 @@ The pre-trained DeFMO model as reported in the paper is available here: https://
 For the dataset generation, please download the ShapeNetCore.v2 dataset: https://www.shapenet.org/.
 
 The textures are from the DTD dataset: https://www.robots.ox.ac.uk/~vgg/data/dtd/. The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded here: https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK.
+
+Then, insert your paths in renderer/settings.py file. You also need Blender 2.79b with Python enabled. Then, use run_render.py to generate the dataset. Please note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps, the dataset takes up to 1 TB of memory.
 
 ### Evaluation real-world datasets
 All evaluation datasets can be found at http://cmp.felk.cvut.cz/fmo/. We provide a download_datasets.sh script to download the Falling Objects, the TbD-3D, and the TbD datasets.
