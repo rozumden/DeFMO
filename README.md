@@ -3,6 +3,7 @@
 ### DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (arxiv 2020)
 
 ### Qualitative results: https://www.youtube.com/watch?v=pmAynZvaaQ4
+#### Denys Rozumnyi, Martin R. Oswald, Vittorio Ferrari, Jiri Matas, Marc Pollefeys
 
 <img src="example/results_defmo.png" width="500">
 
