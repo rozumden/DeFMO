@@ -37,11 +37,14 @@ class ShapeBlurDataset(torch.utils.data.Dataset):
         inds_left = torch.cat((inds_left, (g_fmo_steps-1)-torch.flip(inds_left,[0])), 0)
         times_left = self.timestamps[inds_left]
 
-        hs_frames = []
-        for ind in inds:
-            gt_batch = get_gt_sample(gt_paths, ind)
-            hs_frames.append(gt_batch)
-        hs_frames = torch.stack(hs_frames,0).contiguous()
+        if isinstance(gt_paths, list):
+            hs_frames = []
+            for ind in inds:
+                gt_batch = get_gt_sample(gt_paths, ind)
+                hs_frames.append(gt_batch)
+            hs_frames = torch.stack(hs_frames,0).contiguous()
+        else:
+            hs_frames = gt_paths
 
         if self.do_augment:
             if random.random() > 0.5:

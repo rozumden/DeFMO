@@ -55,7 +55,7 @@ def main():
 
 	## run on falling objects 
 	if True:
-		get_figure_images(encoder, rendering, device, 'tbdfalling', 2, 2, results_mode=True, n_occ=7)
+		get_figure_images(encoder, rendering, device, 'tbdfalling', 2, 31+2, results_mode=True, n_occ=7)
 		# get_figure_images(encoder, rendering, device, 'tbdfalling', 0, 4, results_mode=True)
 		# get_figure_images(encoder, rendering, device, 'tbdfalling', 1, 7, results_mode=True)
 		# get_figure_images(encoder, rendering, device, 'tbdfalling', 2, 2, results_mode=True)

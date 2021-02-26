@@ -1,4 +1,5 @@
-## TODO: insert your ShapeNetCore.v2, textures, training and testing background paths
+## TODO: insert your ShapeNetCore.v2, textures, training and testing background paths 
+# NOTE that HDF5 is not generated here, to convert the dataset to HDF5 use dataloaders/conversion.py
 g_datasets_path = '/mnt/lascar/rozumden/dataset'
 g_shapenet_path =  g_datasets_path + '/ShapeNetv2/ShapeNetCore.v2'
 g_textures_path = g_datasets_path + '/ShapeNetv2/textures'
