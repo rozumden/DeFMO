@@ -1,6 +1,6 @@
 # Evaluation, Training, Demo, and Inference of DeFMO 
 
-### DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (arxiv 2020)
+### DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (CVPR 2021)
 #### Denys Rozumnyi, Martin R. Oswald, Vittorio Ferrari, Jiri Matas, Marc Pollefeys
 
 ### Qualitative results: https://www.youtube.com/watch?v=pmAynZvaaQ4
@@ -67,9 +67,9 @@ If you use this repository, please cite the following publication ( https://arxi
 @inproceedings{defmo,
   author = {Denys Rozumnyi and Martin R. Oswald and Vittorio Ferrari and Jiri Matas and Marc Pollefeys},
   title = {DeFMO: Deblurring and Shape Recovery of Fast Moving Objects},
-  booktitle = {arxiv},
-  address = {online},
-  month = dec,
-  year = {2020}
+  booktitle = {CVPR},
+  address = {Nashville, Tennessee, USA},
+  month = jun,
+  year = {2021}
 }
 ```
