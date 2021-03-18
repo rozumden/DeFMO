@@ -3,14 +3,14 @@
 ### DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (CVPR 2021)
 #### Denys Rozumnyi, Martin R. Oswald, Vittorio Ferrari, Jiri Matas, Marc Pollefeys
 
-### Qualitative results: https://www.youtube.com/watch?v=pmAynZvaaQ4
+### Qualitative results on [YouTube](https://www.youtube.com/watch?v=pmAynZvaaQ4)
 
 
 <img src="example/results_defmo.png" width="500">
 
 ### Pre-trained models
 
-The pre-trained DeFMO model as reported in the paper is available here: https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF. Put them into ./saved_models sub-folder.
+The pre-trained DeFMO model as reported in the paper is available [here](https://polybox.ethz.ch/index.php/s/M06QR8jHog9GAcF). Put the models into ./saved_models sub-folder.
 
 ### Inference
 For generating video temporal super-resolution:
@@ -24,20 +24,20 @@ python run.py --im example/im.png --bgr example/bgr.png
 ```
 
 ### Evaluation, benchmarking
-Simple evaluation scripts for evaluation on FMO deblurring benchmarks are provided at https://github.com/rozumden/fmo-deblurring-benchmark. You can download there all evaluation dataset: Falling Objects, TbD-3D, and TbD, which are also available at at http://cmp.felk.cvut.cz/fmo/.
+Simple evaluation scripts for evaluation on [FMO deblurring benchmark](https://github.com/rozumden/fmo-deblurring-benchmark). You can download there all evaluation dataset: Falling Objects, TbD-3D, and TbD, which are also available [here](http://cmp.felk.cvut.cz/fmo/).
 
 
 
 ### Synthetic dataset generation
 For the dataset generation, please download: 
 
-* ShapeNetCore.v2 dataset: https://www.shapenet.org/.
+* [ShapeNetCore.v2 dataset](https://www.shapenet.org/).
 
-* Textures from the DTD dataset: https://www.robots.ox.ac.uk/~vgg/data/dtd/. The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded here: https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK.
+* Textures from the [DTD dataset](https://www.robots.ox.ac.uk/~vgg/data/dtd/). The exact split used in DeFMO is from the "Neural Voxel Renderer: Learning an Accurate and Controllable Rendering Tool" model and can be downloaded [here](https://polybox.ethz.ch/index.php/s/9Abv3QRm0ZgPzhK).
 
-* Backgrounds for the training dataset from the VOT dataset: https://www.votchallenge.net/vot2018/dataset.html. 
+* Backgrounds for the training dataset from the [VOT dataset](https://www.votchallenge.net/vot2018/dataset.html). 
 
-* Backgrounds for the testing dataset from the Sports1M dataset: https://cs.stanford.edu/people/karpathy/deepvideo/.
+* Backgrounds for the testing dataset from the [Sports1M dataset](https://cs.stanford.edu/people/karpathy/deepvideo/).
 
 * Blender 2.79b with Python enabled.
 
@@ -56,7 +56,7 @@ python train.py
 
 Reference
 ------------
-If you use this repository, please cite the following publication ( https://arxiv.org/abs/2012.00595 ):
+If you use this repository, please cite the following [publication](https://arxiv.org/abs/2012.00595):
 
 ```bibtex
 @inproceedings{defmo,
