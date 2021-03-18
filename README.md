@@ -23,11 +23,9 @@ For generating temporal super-resolution of a single frame with the given backgr
 python run.py --im example/im.png --bgr example/bgr.png
 ```
 
-### Evaluation
-After downloading the pre-trained models and downloading the evaluation datasets, you can run
-```bash
-python eval_dataset.py
-```
+### Evaluation, benchmarking
+Simple evaluation scripts for evaluation on FMO deblurring benchmarks are provided at https://github.com/rozumden/fmo-deblurring-benchmark
+
 
 
 ### Synthetic dataset generation
