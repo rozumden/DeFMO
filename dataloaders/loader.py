@@ -6,7 +6,6 @@ import os
 import random
 from main_settings import *
 import pdb
-import h5py
 
 class ShapeBlurDataset(torch.utils.data.Dataset):
     def __init__(self, dataset_folder=g_dataset_folder, render_objs = g_render_objs, number_per_category=g_number_per_category, do_augment=False, use_latent_learning=g_use_latent_learning):
@@ -37,14 +36,11 @@ class ShapeBlurDataset(torch.utils.data.Dataset):
         inds_left = torch.cat((inds_left, (g_fmo_steps-1)-torch.flip(inds_left,[0])), 0)
         times_left = self.timestamps[inds_left]
 
-        if isinstance(gt_paths, list):
-            hs_frames = []
-            for ind in inds:
-                gt_batch = get_gt_sample(gt_paths, ind)
-                hs_frames.append(gt_batch)
-            hs_frames = torch.stack(hs_frames,0).contiguous()
-        else:
-            hs_frames = gt_paths
+        hs_frames = []
+        for ind in inds:
+            gt_batch = get_gt_sample(gt_paths, ind)
+            hs_frames.append(gt_batch)
+        hs_frames = torch.stack(hs_frames,0).contiguous()
 
         if self.do_augment:
             if random.random() > 0.5:
@@ -64,57 +60,34 @@ def get_transform():
         return transforms.ToTensor()
  
 def get_training_sample(render_objs = g_render_objs, min_obj=1, max_obj=g_number_per_category, dataset_folder=g_dataset_folder, use_latent_learning=False):
-    use_hdf5 = 'hdf5' in dataset_folder
-    if use_hdf5:
-        h5_file = h5py.File(dataset_folder, 'r', swmr=True)
+    gt_paths = []
     while True:
         obj = random.choice(render_objs)
         times = random.randint(min_obj,max_obj)
-        if use_hdf5:
-            sample = h5_file[obj]["{}_{:04d}".format(obj, times)]
-            I = (sample['im'][...]/255.0).astype('float32')
-            if g_use_median:
-                B = sample['bgr_med'][...]
-            else:
-                B = sample['bgr'][...]
-            B = (B/255.0).astype('float32')
-            GT = sample['GT']
-            hs_frames = []
-            for ki in range(g_fmo_steps):
-                gti = GT["image-{:06d}".format(ki+1)][...]
-                gt_batch = transforms.ToTensor()((gti/65536.0).astype('float32'))
-                hs_frames.append(gt_batch)
-            gt_paths = torch.stack(hs_frames,0).contiguous()
-        else:
-            filename = os.path.join(dataset_folder, obj, "{}_{:04d}.png".format(obj, times))
-            if g_use_median:
-                bgr_path = os.path.join(dataset_folder, obj, "GT", "{}_{:04d}".format(obj, times), "bgr_med.png")
-            if not g_use_median or not os.path.exists(bgr_path):
-                bgr_path = os.path.join(dataset_folder, obj, "GT", "{}_{:04d}".format(obj, times), "bgr.png")
+        filename = os.path.join(dataset_folder, obj, "{}_{:04d}.png".format(obj, times))
+        if g_use_median:
+            bgr_path = os.path.join(dataset_folder, obj, "GT", "{}_{:04d}".format(obj, times), "bgr_med.png")
+        if not g_use_median or not os.path.exists(bgr_path):
+            bgr_path = os.path.join(dataset_folder, obj, "GT", "{}_{:04d}".format(obj, times), "bgr.png")
 
-            if not os.path.exists(filename) or not os.path.exists(bgr_path):
-                print('Something does not exist: {} or {}'.format(filename, bgr_path))
-                continue
-            I = Image.open(filename)
-            B = Image.open(bgr_path)
-            gt_paths = []
-            for ki in range(g_fmo_steps):
-                gt_paths.append(os.path.join(dataset_folder, obj, "GT", "{}_{:04d}".format(obj, times), "image-{:06d}.png".format(ki+1)))
-       
+        if not os.path.exists(filename) or not os.path.exists(bgr_path):
+            print('Something does not exist: {} or {}'.format(filename, bgr_path))
+            continue
+        I = Image.open(filename)
+        B = Image.open(bgr_path)
         preprocess = get_transform()
         if use_latent_learning:
-            if use_hdf5:
-                print("Not implemented!")
+            I2 = Image.open(os.path.join(dataset_folder, obj, "diffbgr", "{:04d}_im.png".format(times)))
+            if g_use_median:
+                B2 = Image.open(os.path.join(dataset_folder, obj, "diffbgr", "{:04d}_bgrmed.png".format(times)))
             else:
-                I2 = Image.open(os.path.join(dataset_folder, obj, "diffbgr", "{:04d}_im.png".format(times)))
-                if g_use_median:
-                    B2 = Image.open(os.path.join(dataset_folder, obj, "diffbgr", "{:04d}_bgrmed.png".format(times)))
-                else:
-                    B2 = Image.open(os.path.join(dataset_folder, obj, "diffbgr", "{:04d}_bgr.png".format(times)))
+                B2 = Image.open(os.path.join(dataset_folder, obj, "diffbgr", "{:04d}_bgr.png".format(times)))
             input_batch = torch.cat((preprocess(I), preprocess(B), preprocess(I2), preprocess(B2)), 0)
         else:
             input_batch = torch.cat((preprocess(I), preprocess(B)), 0)
 
+        for ki in range(g_fmo_steps):
+            gt_paths.append(os.path.join(dataset_folder, obj, "GT", "{}_{:04d}".format(obj, times), "image-{:06d}.png".format(ki+1)))
         return input_batch, gt_paths
 
 def get_gt_sample(gt_paths, ti):

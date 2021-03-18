@@ -1,11 +1,9 @@
 import numpy as np
 import math 
 
-# from deblatting_python.gpu.deblatting_gpu import *
-# from deblatting_python.deblatting_pw import *
+
 from main_settings import *
 
-from skimage.draw import line_aa
 from skimage import measure
 import skimage.transform
 from scipy import signal
@@ -16,90 +14,6 @@ import scipy.misc
 import cv2
 import pdb
 
-def deblatting_oracle_runner(img,bgrr,debl_dim,gt_traj):
-	nsplits = gt_traj.shape[1]
-	Hso = np.zeros(img.shape[:2]+(nsplits,))
-
-	for ni in range(nsplits): 
-		if ni < nsplits-1:
-			pars = np.array([gt_traj[:,ni], gt_traj[:,ni+1]-gt_traj[:,ni]]).T
-		else:
-			pars = np.array([gt_traj[:,ni], gt_traj[:,ni]-gt_traj[:,ni-1]]).T
-		Hso[:,:,ni] = renderTraj(pars, Hso[:,:,ni])
-	Hso /= Hso.sum()
-
-	Fs,Ms = estimateFM_pw(img,bgrr,Hso,np.zeros(tuple(debl_dim)+(nsplits,)))
-	rgba_tbd3d = np.concatenate((Fs, Ms),2)
-	return rgba_tbd3d, Hso
-
-def deblatting_single_runner(imr,bgrr,nsplits,debl_dim):
-	dI = imr.transpose(2,0,1)[np.newaxis,:,:,:]
-	dB = bgrr.transpose(2,0,1)[np.newaxis,:,:,:]
-	M0 = np.zeros(debl_dim)
-	H,F,M = estimateFMH_gpu(dI, dB, M0)
-	return H,F,M
-
-def deblatting_runner(imr,bgrr,nsplits,debl_dim):
-	dI = imr.transpose(2,0,1)[np.newaxis,:,:,:]
-	dB = bgrr.transpose(2,0,1)[np.newaxis,:,:,:]
-	M0 = np.zeros(debl_dim)
-	H,F,M = estimateFMH_gpu(dI, dB, M0)
-	Fc = F.cpu().numpy()[0].transpose(1,2,0)
-	Mc = M.cpu().numpy()[0].transpose(1,2,0)
-	Hc = H.cpu().numpy()[0,0]
-	Hc /= Hc.sum()
-	Hf,pars = psffit(Hc,True)
-	Fc,Mc = estimateFM(imr,bgrr,Hf,Mc[:,:,0])
-	mynorm = np.linalg.norm(pars[:,1])
-	if mynorm < 1:
-		red_nsplits = 1
-	else:
-		pcd = nsplits
-		while pcd % 2 == 0 and pcd > 0: pcd = pcd // 2 
-		red_nsplits = pcd*int(np.min([nsplits/pcd, np.max([1,2**int(np.log2(mynorm))])]))
-	Hs = psfsplit(Hc,red_nsplits)
-	Fs,Ms = estimateFM_pw(imr,bgrr,Hs,np.zeros(tuple(debl_dim)+(red_nsplits,)))
-	inds = np.repeat(range(red_nsplits), int(nsplits/red_nsplits))
-	Hs = Hs[:,:,inds]
-	Fs = Fs[:,:,:,inds]
-	Ms = Ms[:,:,:,inds]
-	est_hs_tbd = np.zeros(imr.shape+(nsplits,))
-	est_hs_tbd3d = np.zeros(imr.shape+(nsplits,))
-	est_traj = np.zeros((2,nsplits))
-	timestamps = np.linspace(0,1,nsplits)
-	for ki in range(nsplits): 
-		Hsc = Hs[:,:,ki]/np.sum(Hs[:,:,ki])
-		est_hs_tbd[:,:,:,ki] = fmo_model(bgrr,Hsc,Fc,Mc)
-		est_hs_tbd3d[:,:,:,ki] = fmo_model(bgrr,Hsc,Fs[:,:,:,ki],Ms[:,:,0,ki])
-		est_traj[:,ki] = pars[:,0] + timestamps[ki]*pars[:,1]
-	rgba_tbd = np.repeat(np.concatenate((Fc, Mc[:,:,None]),2)[...,None], nsplits, 3)
-	rgba_tbd3d = np.concatenate((Fs, Ms),2)
-	return est_hs_tbd, est_hs_tbd3d, rgba_tbd, rgba_tbd3d, est_traj[[1,0]], Hs
-
-def calculate_psnr(img1, img2, max_value=1):
-    """"Calculating peak signal-to-noise ratio (PSNR) between two images."""
-    if len(img2.shape) == 3:
-    	mse = np.mean((np.array(img1, dtype=np.float32) - np.array(img2[:,:,:,None], dtype=np.float32)) ** 2)
-    else:
-    	mse = np.mean((np.array(img1, dtype=np.float32) - np.array(img2, dtype=np.float32)) ** 2)
-
-    if mse == 0:
-        return 100
-    return 20 * np.log10(max_value / (np.sqrt(mse)))
- 
-def calculate_ssim(img1, img2):
-    """"Calculating Structural similarity index (SSIM) between two images."""
-    if len(img1.shape) == 3:
-    	return metrics.structural_similarity(img1, img2, data_range=img2.max() - img2.min())
-    else:
-    	ssims = np.zeros(img1.shape[3]) 
-    	for kk in range(ssims.shape[0]):
-    		if len(img2.shape) == 4:
-    			ssims[kk] = metrics.structural_similarity(img1[:,:,:,kk], img2[:,:,:,kk], data_range=img2.max() - img2.min(),multichannel=True)
-    		else:
-    			ssims[kk] = metrics.structural_similarity(img1[:,:,:,kk], img2, data_range=img2.max() - img2.min(),multichannel=True)
-
-    	return np.mean(ssims)
 
 def fmo_detect(I,B):
 	## simulate FMO detector -> find approximate location of FMO
@@ -116,7 +30,6 @@ def fmo_detect(I,B):
 	if ind == -1:
 		return [], 0
 	
-	# pdb.set_trace()
 	bbox = np.array(regions[ind].bbox).astype(int)
 	return bbox, regions[ind].minor_axis_length
 
@@ -273,46 +186,6 @@ def calciou(p1, p2, rad):
 	U = 2* np.pi * rad*rad - I
 	iou = I / U
 	return iou
-
-def write_trajectory(Img, traj):
-	for kk in range(traj.shape[1]-1):
-		Img = renderTraj(np.c_[traj[:,kk], traj[:,kk+1]-traj[:,kk]][::-1], Img)
-	# Img[traj[1].astype(int),traj[0].astype(int),1] = 1.0
-	return Img
-	
-
-def renderTraj(pars, H):
-	## Input: pars is either 2x2 (line) or 2x3 (parabola)
-	if pars.shape[1] == 2:
-		pars = np.concatenate( (pars, np.zeros((2,1))),1)
-		ns = 2
-	else:
-		ns = 5
-
-	ns = np.max([2, ns])
-
-	rangeint = np.linspace(0,1,ns)
-	for timeinst in range(rangeint.shape[0]-1):
-		ti0 = rangeint[timeinst]
-		ti1 = rangeint[timeinst+1]
-		start = pars[:,0] + pars[:,1]*ti0 + pars[:,2]*(ti0*ti0)
-		end = pars[:,0] + pars[:,1]*ti1 + pars[:,2]*(ti1*ti1)
-		start = np.round(start).astype(np.int32)
-		end = np.round(end).astype(np.int32)
-		rr, cc, val = line_aa(start[0], start[1], end[0], end[1])
-		valid = np.logical_and(np.logical_and(rr < H.shape[0], cc < H.shape[1]), np.logical_and(rr > 0, cc > 0))
-		rr = rr[valid]
-		cc = cc[valid]
-		val = val[valid]
-		if len(H.shape) > 2:
-			H[rr, cc, 0] = 0
-			H[rr, cc, 1] = 0
-			H[rr, cc, 2] = val
-		else:
-			H[rr, cc] = val 
-
-
-	return H
 
 
 def generate_lowFPSvideo(V,k=8,gamma_coef = 0.4,do_WB=True):

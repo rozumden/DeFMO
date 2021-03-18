@@ -10,48 +10,6 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import pdb
 
-class SRWriter:
-	def __init__(self, imtemp, path, available_gt=True):
-		self.available_gt = available_gt
-		if self.available_gt:
-			fctr = 3
-		else:
-			fctr = 2
-		if imtemp.shape[0] > imtemp.shape[1]:
-			self.width = True
-			shp = (imtemp.shape[0], imtemp.shape[1]*fctr, 3)
-			self.value = imtemp.shape[1]
-		else:
-			self.width = False
-			shp = (imtemp.shape[0]*fctr, imtemp.shape[1], 3)
-			self.value = imtemp.shape[0]
-		self.video = cv2.VideoWriter(path,cv2.VideoWriter_fourcc(*"MJPG"), 12, (shp[1], shp[0]), True)
-		self.img = np.zeros(shp)
-
-	def update_ls(self,lsf):
-		if self.width:
-			self.img[:,:self.value] = lsf
-		else:
-			self.img[:self.value,:] = lsf
-
-	def write_next(self,hs,est):
-		if hs is not None:
-			if self.width:
-				self.img[:,2*self.value:] = hs
-			else:
-				self.img[2*self.value:,:] = hs
-		if est is not None:
-			if self.width:
-				self.img[:,self.value:2*self.value] = est
-			else:
-				self.img[self.value:2*self.value,:] = est
-		self.img[self.img>1]=1
-		self.img[self.img<0]=0
-		self.video.write( (self.img.copy() * 255)[:,:,[2,1,0]].astype(np.uint8) )
-
-	def close(self):
-		self.video.release()
-
 def renders2traj(renders,device):
 	masks = renders[:,:,-1]
 	sumx = torch.sum(masks,-2)
