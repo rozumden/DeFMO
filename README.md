@@ -24,7 +24,7 @@ python run.py --im example/im.png --bgr example/bgr.png
 ```
 
 ### Evaluation, benchmarking
-Simple evaluation scripts for evaluation on FMO deblurring benchmarks are provided at https://github.com/rozumden/fmo-deblurring-benchmark
+Simple evaluation scripts for evaluation on FMO deblurring benchmarks are provided at https://github.com/rozumden/fmo-deblurring-benchmark. You can download there all evaluation dataset: Falling Objects, TbD-3D, and TbD, which are also available at at http://cmp.felk.cvut.cz/fmo/.
 
 
 
@@ -52,9 +52,6 @@ Set up all paths in main_settings.py and run
 ```bash
 python train.py
 ```
-
-### Evaluation on real-world datasets
-All evaluation datasets can be found at http://cmp.felk.cvut.cz/fmo/. We provide a download_datasets.sh script to download the Falling Objects, the TbD-3D, and the TbD datasets.
 
 
 Reference
