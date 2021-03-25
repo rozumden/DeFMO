@@ -1,3 +1,7 @@
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/defmo-deblurring-and-shape-recovery-of-fast/video-super-resolution-on-falling-objects)](https://paperswithcode.com/sota/video-super-resolution-on-falling-objects?p=defmo-deblurring-and-shape-recovery-of-fast)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/defmo-deblurring-and-shape-recovery-of-fast/video-super-resolution-on-tbd-3d)](https://paperswithcode.com/sota/video-super-resolution-on-tbd-3d?p=defmo-deblurring-and-shape-recovery-of-fast)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/defmo-deblurring-and-shape-recovery-of-fast/video-super-resolution-on-tbd)](https://paperswithcode.com/sota/video-super-resolution-on-tbd?p=defmo-deblurring-and-shape-recovery-of-fast)
+
 # Evaluation, Training, Demo, and Inference of DeFMO 
 
 ### [DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (CVPR 2021)](https://arxiv.org/abs/2012.00595)
