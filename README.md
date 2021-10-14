@@ -7,6 +7,9 @@
 ### [DeFMO: Deblurring and Shape Recovery of Fast Moving Objects (CVPR 2021)](https://arxiv.org/abs/2012.00595)
 #### Denys Rozumnyi, Martin R. Oswald, Vittorio Ferrari, Jiri Matas, Marc Pollefeys
 
+### UPDATE
+You can newly use DeFMO in [Kornia](https://kornia.readthedocs.io/en/latest/feature.html) (`kornia.feature.DeFMO`).  
+
 ### Qualitative results on [YouTube](https://www.youtube.com/watch?v=pmAynZvaaQ4)
 
 
