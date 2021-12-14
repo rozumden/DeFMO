@@ -129,7 +129,6 @@ def normalized_cross_correlation_channels(image1, image2):
 	padding = (0,) + tuple(side // 10 for side in sh[1:])
 	result = F.conv3d(im1b[None], im2b[:,None], padding=padding, bias=None, groups=bs*ts)
 	ncc = result.view(bs*ts, -1).max(1)[0].view(bs, ts)
-	breakpoint()
 	return ncc
 
 def normalized_cross_correlation(image1, image2):
