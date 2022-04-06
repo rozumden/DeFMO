@@ -52,7 +52,7 @@ Then, insert your paths in renderer/settings.py file. To generate the dataset, r
 ```bash
 python run_render.py
 ```
-Note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes up to 1 TB of storage memory. Due to this and also the ShapeNet licence, we cannot make the pre-generated dataset public - please generate it by yourself using the steps above. 
+Note that the full training dataset with 50 object categories, 1000 objects per category, and 24 timestamps takes 72 GB of storage memory. Due to this and also the ShapeNet licence, we cannot make the pre-generated dataset public - please generate it by yourself using the steps above. 
 
 ### Training
 Set up all paths in main_settings.py and run
